@@ -28,7 +28,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "hacoidev/crud": "^1.0.0",
+        "tanhatcms/crud": "^1.0.0",
         "cviebrock/eloquent-sluggable": "^9.0||^8.0||^7.0||^6.0||4.8"
     },
     "require-dev": {
