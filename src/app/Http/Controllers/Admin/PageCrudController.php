@@ -84,7 +84,7 @@ class PageCrudController extends CrudController
             'name' => 'template',
             'label' => trans('backpack::pagemanager.template'),
             'type' => 'select_page_template',
-            'view_namespace' => file_exists(resource_path('views/vendor/backpack/crud/fields/select_page_template.blade.php')) ? null : 'pagemanager::fields',
+            'view_namespace' => file_exists(resource_path('views/vendor/tannhatcms/crud/fields/select_page_template.blade.php')) ? null : 'pagemanager::fields',
             'options' => $this->getTemplatesArray(),
             'value' => $template,
             'allows_null' => false,
