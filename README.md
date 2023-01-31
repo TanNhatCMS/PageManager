@@ -112,7 +112,7 @@ php artisan vendor:publish --provider="Backpack\PageManager\PageManagerServicePr
 php artisan migrate
 ```
 
-5) [optional] Add a menu item for it in resources/views/vendor/hacoidev/base/inc/sidebar.blade.php :
+5) [optional] Add a menu item for it in resources/views/vendor/tannhatcms/base/inc/sidebar.blade.php or menu.blade.php:
 
 ```
 php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('page') }}'><i class='nav-icon la la-file-o'></i> <span>Pages</span></a></li>"
