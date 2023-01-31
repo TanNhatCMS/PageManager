@@ -20,7 +20,7 @@ class Page extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'pages';
+    protected $table = 'pages_posts';
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];

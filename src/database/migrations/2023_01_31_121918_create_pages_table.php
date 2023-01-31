@@ -13,14 +13,14 @@ class CreatePagesTable extends Migration
     public function up()
     {
         // TODO: use JSON data type for 'extras' instead of string
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('pages_posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('template');
             $table->string('name');
             $table->string('title');
             $table->string('slug');
             $table->text('content')->nullable();
-            $table->text('extras')->nullable();
+            $table->longText('extras')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +33,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pages');
+        Schema::drop('pages_posts');
     }
 }
