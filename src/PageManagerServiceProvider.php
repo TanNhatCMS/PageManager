@@ -29,9 +29,8 @@ class PageManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $backpack_views = [__DIR__.'/resources/views' => resource_path('views/vendor/backpack')];
         // publish views
-        $this->publishes($backpack_views, 'views');
+        $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/tannhatcms')], 'views');
         // publish PageTemplates trait
       //  $this->publishes([__DIR__.'/app/PageTemplates.php' => app_path('PageTemplates.php')], 'trait');
         // publish migrations
@@ -47,10 +46,6 @@ class PageManagerServiceProvider extends ServiceProvider
 
         $customCrudFolder = resource_path('views/vendor/tannhatcms/crud');
 
-        // - first the published/overwritten views (in case they have any changes)
-        if (file_exists($customBaseFolder)) {
-            $this->loadViewsFrom($customBaseFolder, 'backpack');
-        }
         if (file_exists($customCrudFolder)) {
             $this->loadViewsFrom($customCrudFolder, 'crud');
         }
