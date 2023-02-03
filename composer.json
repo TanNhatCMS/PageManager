@@ -25,10 +25,10 @@
             "role": "Architect & Developer"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "tanhatcms/crud": "^1.0.0",
+        "tanhatcms/crud": "*",
         "cviebrock/eloquent-sluggable": "^9.0||^8.0||^7.0||^6.0||4.8"
     },
     "require-dev": {
