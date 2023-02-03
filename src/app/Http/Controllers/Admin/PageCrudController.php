@@ -6,7 +6,7 @@ use Backpack\PageManager\app\PageTemplates;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\PageManager\app\Http\Requests\PageRequest;
-use Str;
+
 
 class PageCrudController extends CrudController
 {
@@ -163,7 +163,7 @@ class PageCrudController extends CrudController
         $templates = $this->getTemplates();
 
         foreach ($templates as $template) {
-            $templates_array[$template->name] = trans(Str::title($template->name));
+            $templates_array[$template->name] = trans($template->name);
         }
 
         return $templates_array;
