@@ -29,7 +29,7 @@ class PageManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $backpack_views = [__DIR__.'/resources/views' => resource_path('views/vendor/backpack')];x
+        $backpack_views = [__DIR__.'/resources/views' => resource_path('views/vendor/backpack')];
         // publish views
         $this->publishes($backpack_views, 'views');
         // publish PageTemplates trait
