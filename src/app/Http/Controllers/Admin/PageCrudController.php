@@ -2,7 +2,7 @@
 
 namespace Backpack\PageManager\app\Http\Controllers\Admin;
 
-use App\PageTemplates;
+use Backpack\PageManager\app\PageTemplates;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\PageManager\app\Http\Requests\PageRequest;
@@ -143,7 +143,7 @@ class PageCrudController extends CrudController
     {
         $templates_array = [];
 
-        $templates_trait = new \ReflectionClass('App\PageTemplates');
+        $templates_trait = new \ReflectionClass('Backpack\PageManager\app\PageTemplates');
         $templates = $templates_trait->getMethods(\ReflectionMethod::IS_PRIVATE);
 
         if (! count($templates)) {
@@ -163,7 +163,7 @@ class PageCrudController extends CrudController
         $templates = $this->getTemplates();
 
         foreach ($templates as $template) {
-            $templates_array[$template->name] = str_replace('_', ' ', Str::title($template->name));
+            $templates_array[$template->name] = trans(Str::title($template->name));
         }
 
         return $templates_array;

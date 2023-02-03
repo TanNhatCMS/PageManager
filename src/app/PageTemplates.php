@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Backpack\PageManager\app;
 
 trait PageTemplates
 {

@@ -32,7 +32,7 @@ class PageManagerServiceProvider extends ServiceProvider
         // publish views
         $this->publishes([__DIR__.'/resources/views' => base_path('resources/views')], 'views');
         // publish PageTemplates trait
-        $this->publishes([__DIR__.'/app/PageTemplates.php' => app_path('PageTemplates.php')], 'trait');
+      //  $this->publishes([__DIR__.'/app/PageTemplates.php' => app_path('PageTemplates.php')], 'trait');
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         // public config
