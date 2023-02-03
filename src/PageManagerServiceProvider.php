@@ -47,11 +47,11 @@ class PageManagerServiceProvider extends ServiceProvider
         $customCrudFolder = resource_path('views/vendor/tannhatcms/crud');
 
         if (file_exists($customCrudFolder)) {
-            $this->loadViewsFrom($customCrudFolder, 'crud');
+            $this->loadViewsFrom($customCrudFolder, 'pagemanager');
         }
         // - then the stock views that come with the package, in case a published view might be missing
 
-        $this->loadViewsFrom(realpath(__DIR__.'/resources/views/crud'), 'crud');
+        $this->loadViewsFrom(realpath(__DIR__.'/resources/views/crud'), 'pagemanager');
     }
 
     /**
