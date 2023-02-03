@@ -29,8 +29,9 @@ class PageManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $backpack_views = [__DIR__.'/resources/views' => resource_path('views/vendor/backpack')];x
         // publish views
-        $this->publishes([__DIR__.'/resources/views' => base_path('resources/views')], 'views');
+        $this->publishes($backpack_views, 'views');
         // publish PageTemplates trait
       //  $this->publishes([__DIR__.'/app/PageTemplates.php' => app_path('PageTemplates.php')], 'trait');
         // publish migrations
@@ -41,7 +42,21 @@ class PageManagerServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
 
         $this->mergeConfigFrom(__DIR__.'/config/pagemanager.php', 'backpack.pagemanager');
-        $this->loadViewsFrom(realpath(__DIR__.'/resources/views/vendor/tannhatcms/crud'), 'pagemanager');
+
+
+
+        $customCrudFolder = resource_path('views/vendor/tannhatcms/crud');
+
+        // - first the published/overwritten views (in case they have any changes)
+        if (file_exists($customBaseFolder)) {
+            $this->loadViewsFrom($customBaseFolder, 'backpack');
+        }
+        if (file_exists($customCrudFolder)) {
+            $this->loadViewsFrom($customCrudFolder, 'crud');
+        }
+        // - then the stock views that come with the package, in case a published view might be missing
+
+        $this->loadViewsFrom(realpath(__DIR__.'/resources/views/crud'), 'crud');
     }
 
     /**
