@@ -38,7 +38,7 @@ class PageManagerServiceProvider extends ServiceProvider
         // public config
         $this->publishes([__DIR__.'/config/pagemanager.php' => config_path('backpack/pagemanager.php')]);
         // public languages
-        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
+        $this->publishes([__DIR__.'/resources/lang' => app()->langPath().'/vendor/backpack'], 'lang');
 
         $this->mergeConfigFrom(__DIR__.'/config/pagemanager.php', 'backpack.pagemanager');
 
