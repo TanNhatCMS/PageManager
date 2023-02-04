@@ -103,7 +103,7 @@ trait PageTemplates
             'placeholder' => trans('backpack::pagemanager.content_placeholder'),
         ]);
         $this->crud->addField([   // CustomHTML
-            'name' => 'content_separator',
+            'name' => 'thumb_url_separator',
             'type' => 'custom_html',
             'value' => '<br><h2>'.trans('backpack::pagemanager.images').'</h2><hr>',
         ]);
