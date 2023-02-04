@@ -21,4 +21,6 @@ return [
     'template_not_found' => 'The template could not be found. It might have been deleted since this page was created. To continue, please ask your webmin or development team to fix this.',
     'about_us' => 'Aabout us',
     'services' => 'Services',
+    'charts' => 'Charts',
+    'showtimes' => 'Showtimes',
 ];
