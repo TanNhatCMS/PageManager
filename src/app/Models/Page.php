@@ -54,7 +54,7 @@ class Page extends Model
 
     public function getTemplateName()
     {
-        return str_replace('_', ' ', Str::title($this->template));
+        return trans('backpack::pagemanager.'.$this->template);
     }
 
     public function getPageLink()

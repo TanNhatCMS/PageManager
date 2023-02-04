@@ -163,7 +163,7 @@ class PageCrudController extends CrudController
         $templates = $this->getTemplates();
 
         foreach ($templates as $template) {
-            $templates_array[$template->name] = trans($template->name);
+            $templates_array[$template->name] = trans('backpack::pagemanager.'.$template->name);
         }
 
         return $templates_array;

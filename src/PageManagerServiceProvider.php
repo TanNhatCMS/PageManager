@@ -35,12 +35,14 @@ class PageManagerServiceProvider extends ServiceProvider
       //  $this->publishes([__DIR__.'/app/PageTemplates.php' => app_path('PageTemplates.php')], 'trait');
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
+        $this->mergeConfigFrom(__DIR__.'/config/pagemanager.php', 'backpack.pagemanager');
+
         // public config
         $this->publishes([__DIR__.'/config/pagemanager.php' => config_path('backpack/pagemanager.php')]);
-        // public languages
-        $this->publishes([__DIR__.'/resources/lang' => app()->langPath().'/vendor/backpack'], 'lang');
 
-        $this->mergeConfigFrom(__DIR__.'/config/pagemanager.php', 'backpack.pagemanager');
+        // publish lang files
+        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
+
 
 
 
