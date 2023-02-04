@@ -102,9 +102,14 @@ trait PageTemplates
             'type' => 'summernote',
             'placeholder' => trans('backpack::pagemanager.content_placeholder'),
         ]);
+        $this->crud->addField([   // CustomHTML
+            'name' => 'content_separator',
+            'type' => 'custom_html',
+            'value' => '<br><h2>'.trans('backpack::pagemanager.images').'</h2><hr>',
+        ]);
         $this->crud->addField([
             'name' => 'thumb_url',
-            'label' => trans('backpack::pagemanager.content'),
+            'label' => trans('backpack::pagemanager.images'),
             'type' => 'ckfinder',
             'preview' => [
                 'width' => 'auto',
