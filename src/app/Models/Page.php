@@ -59,7 +59,7 @@ class Page extends Model
 
     public function getPageLink()
     {
-        return url($this->slug);
+        return url("page/".$this->slug);
     }
 
     public function getOpenButton()
