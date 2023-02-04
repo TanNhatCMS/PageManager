@@ -19,6 +19,15 @@ trait PageTemplates
     | - page title
     | - page slug
     */
+    private function about_us()
+    {
+        $this->crud->addField([
+            'name' => 'content',
+            'label' => trans('backpack::pagemanager.content'),
+            'type' => 'summernote',
+            'placeholder' => trans('backpack::pagemanager.content_placeholder'),
+        ]);
+    }
     private function showtimes(){
         $this->crud->addField([   // CustomHTML
             'name' => 'metas_separator',
@@ -90,11 +99,20 @@ trait PageTemplates
         $this->crud->addField([
             'name' => 'content',
             'label' => trans('backpack::pagemanager.content'),
+            'type' => 'summernote',
+            'placeholder' => trans('backpack::pagemanager.content_placeholder'),
+        ]);
+        $this->crud->addField([
+            'name' => 'thumb_url',
+            'label' => trans('backpack::pagemanager.content'),
             'type' => 'ckfinder',
             'preview' => [
                 'width' => 'auto',
-                'height' => '340px'
+                'height' => 'auto'
             ],
+            'fake' => true,
+            'has_preview' => true,
+            'store_in' => 'extras',
             'placeholder' => trans('backpack::pagemanager.content_placeholder'),
         ]);
     }
@@ -138,13 +156,5 @@ trait PageTemplates
         ]);
     }
 
-    private function about_us()
-    {
-        $this->crud->addField([
-            'name' => 'content',
-            'label' => trans('backpack::pagemanager.content'),
-            'type' => 'summernote',
-            'placeholder' => trans('backpack::pagemanager.content_placeholder'),
-        ]);
-    }
+
 }
