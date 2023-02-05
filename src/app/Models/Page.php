@@ -56,28 +56,25 @@ class Page extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function getUrl()
-    {
-          return getPageLink();
-    }
+
     public function generateSeoTags($seo_title, $des, $seo_key)
     {
         $seo_des = Str::limit( $des, 150, '...');
         SEOTools::setTitle($seo_title, false);
         SEOTools::setDescription($seo_des);
-        SEOTools::setCanonical($this->getUrl());
+        SEOTools::setCanonical($this->getPageLink());
         SEOTools::metatags()->addKeyword($seo_des);
         SEOTools::metatags()->setPrev(request()->root());
         SEOTools::opengraph()->setSiteName(setting('site_meta_siteName'));
         SEOTools::opengraph()->addProperty('type', 'movie');
         SEOTools::opengraph()->addProperty('locale', 'vi-VN');
-        SEOTools::opengraph()->addProperty('url', $this->getUrl());
+        SEOTools::opengraph()->addProperty('url', $this->getPageLink());
         SEOTools::twitter()->setSite(setting('site_meta_siteName'));
-        SEOTools::twitter()->setUrl($this->getUrl());
+        SEOTools::twitter()->setUrl($this->getPageLink());
         SEOTools::twitter()->setType('movie');
         SEOTools::jsonLd()->setSite(setting('site_meta_siteName'));
         SEOTools::jsonLd()->setType('movie');
-        SEOTools::jsonLd()->setUrl($this->getUrl());
+        SEOTools::jsonLd()->setUrl($this->getPageLink());
     }
 
     protected function descriptionPattern(): string
