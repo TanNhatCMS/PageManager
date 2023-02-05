@@ -23,4 +23,5 @@ return [
     'services' => 'Services',
     'charts' => 'Charts',
     'showtimes' => 'Showtimes',
+    'test' => 'Test',
 ];

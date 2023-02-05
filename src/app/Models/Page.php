@@ -7,30 +7,24 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Artesaos\SEOTools\Facades\JsonLdMulti;
-use Artesaos\SEOTools\Facades\OpenGraph;
-use Artesaos\SEOTools\Facades\SEOMeta;
-use Artesaos\SEOTools\Facades\TwitterCard;
 
+
+use Artesaos\SEOTools\Facades\SEOTools;
 use Ophim\Core\Contracts\HasUrlInterface;
 
 use Hacoidev\CachingModel\Contracts\Cacheable;
 use Hacoidev\CachingModel\HasCache;
-use Ophim\Core\Contracts\SeoInterface;
-use Ophim\Core\Traits\HasTitle;
-use Ophim\Core\Traits\HasDescription;
-use Ophim\Core\Traits\HasKeywords;
+
+
 use Ophim\Core\Contracts\TaxonomyInterface;
 
-class Page extends Model implements TaxonomyInterface, Cacheable, SeoInterface
+class Page extends Model implements TaxonomyInterface, Cacheable
 {
     use CrudTrait;
     use Sluggable;
     use SluggableScopeHelpers;
-    use HasCache;
-    use HasTitle;
-    use HasDescription;
-    use HasKeywords;
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -73,52 +67,108 @@ class Page extends Model implements TaxonomyInterface, Cacheable, SeoInterface
     {
           return getPageLink();
     }
-    public function generateSeoTags()
+    public function generateSeoTags($seo_title, $des, $seo_key)
     {
-        $seo_title = $this->getTitle();
-        $seo_des = Str::limit($this->getDescription(), 150, '...');
-        $seo_key = $this->getKeywords();
-
-        SEOMeta::setTitle($seo_title, false)
-            ->setDescription($seo_des)
-            ->addKeyword($seo_key )
-            ->setCanonical($this->getUrl())
-            //->setPrev(request()->root())
-            ->setPrev(request()->root());
-        // ->addMeta($meta, $value, 'property');
-
-        OpenGraph::setSiteName(setting('site_meta_siteName'))
-            ->setTitle($seo_title, false)
-            ->addProperty('type', 'movie')
-            ->addProperty('locale', 'vi-VN')
-            //->addProperty('updated_time', $this->updated_at)
-            ->addProperty('url', $this->getUrl())
-            ->setDescription($seo_des);
-           // ->addImages([request()->root() . $this->thumb_url, request()->root() . $this->poster_url]);
-
-        TwitterCard::setSite(setting('site_meta_siteName'))
-            ->setTitle($seo_title, false)
-            ->setType('movie')
-            //->setImage(request()->root() . $this->thumb_url)
-            ->setDescription($seo_des)
-            ->setUrl($this->getUrl());
-        // ->addValue($key, $value);
-
-        JsonLdMulti::newJsonLd()
-            ->setSite(setting('site_meta_siteName'))
-            ->setTitle($seo_title, false)
-            ->setType('movie')
-            ->setDescription($seo_des)
-           // ->setImages([request()->root() . $this->thumb_url, request()->root() . $this->poster_url])
-           // ->addValue('director', count($this->directors) ? $this->directors()->first()->name : "")
-            ->setUrl($this->getUrl());
-        // ->addValue($key, $value);
+        $seo_des = Str::limit( $des, 150, '...');
+        SEOTools::setTitle($seo_title, false);
+        SEOTools::setDescription($seo_des);
+        SEOTools::setCanonical($this->getUrl());
+        SEOTools::metatags()->addKeyword($seo_des);
+        SEOTools::metatags()->setPrev(request()->root());
+        SEOTools::opengraph()->setSiteName(setting('site_meta_siteName'));
+        SEOTools::opengraph()->addProperty('type', 'movie');
+        SEOTools::opengraph()->addProperty('locale', 'vi-VN');
+        SEOTools::opengraph()->addProperty('url', $this->getUrl());
+        SEOTools::twitter()->setSite(setting('site_meta_siteName'));
+        SEOTools::twitter()->setUrl($this->getUrl());
+        SEOTools::twitter()->setType('movie');
+        SEOTools::jsonLd()->setSite(setting('site_meta_siteName'));
+        SEOTools::jsonLd()->setType('movie');
+        SEOTools::jsonLd()->setUrl($this->getUrl());
     }
 
+    protected function descriptionPattern(): string
+    {
+        return Setting::get('site.title');
+    }
 
+    public function getDescription(): string
+    {
+        $pattern = $this->descriptionPattern();
 
+        preg_match_all('/{.*?}/', $pattern, $vars);
 
+        foreach ($vars[0] as $var) {
+            try {
+                $x = str_replace('{', '', $var);
+                $x = str_replace('}', '', $x);
+                $keys = explode('.', (string) $x);
+                $data = $this;
+                foreach ($keys as $key) {
+                    $data = $data->{$key};
+                }
+                $pattern = str_replace($var, $data, $pattern);
+            } catch (\Exception $e) {
+            }
+        }
 
+        return $pattern;
+    }
+    protected function keywordsPattern(): string
+    {
+        return Setting::get('site.title');
+    }
+
+    public function getKeywords(): string
+    {
+        $pattern = $this->keywordsPattern();
+
+        preg_match_all('/{.*?}/', $pattern, $vars);
+
+        foreach ($vars[0] as $var) {
+            try {
+                $x = str_replace('{', '', $var);
+                $x = str_replace('}', '', $x);
+                $keys = explode('.', (string) $x);
+                $data = $this;
+                foreach ($keys as $key) {
+                    $data = $data->{$key};
+                }
+                $pattern = str_replace($var, $data, $pattern);
+            } catch (\Exception $e) {
+            }
+        }
+
+        return $pattern;
+    }
+
+    protected function titlePattern(): string
+    {
+        return Setting::get('site.title');
+    }
+
+    public function getTitle(): string
+    {
+        $pattern = $this->titlePattern();
+
+        preg_match_all('/{.*?}/', $pattern, $vars);
+
+        foreach ($vars[0] as $var) {
+            try {
+                $x = str_replace('{', '', $var);
+                $x = str_replace('}', '', $x);
+                $keys = explode('.', (string) $x);
+                $data = $this;
+                foreach ($keys as $key) {
+                    $data = $data->{$key};
+                }
+                $pattern = str_replace($var, $data, $pattern);
+            } catch (\Exception $e) {
+            }
+        }
+
+        return $pattern;
+    }
     public function getTemplateName()
     {
         return trans('backpack::pagemanager.'.$this->template);

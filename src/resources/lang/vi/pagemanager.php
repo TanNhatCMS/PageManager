@@ -18,11 +18,11 @@ return [
     'page_title' => 'Tiêu đề trang',
     'pages' => 'Trang',
     'slug' => 'Đường dẫn tĩnh',
-    'template' => 'Mẫu Template',
-    'template_not_found' => 'Không thể tìm thấy mẫu. Nó có thể đã bị xóa kể từ khi trang này được tạo. Để tiếp tục, vui lòng yêu cầu webmin hoặc nhóm phát triển của bạn khắc phục sự cố này.',
+    'template' => 'Mẫu giao diện',
+    'template_not_found' => 'Không thể tìm thấy mẫu giao diện. Nó có thể đã bị xóa kể từ khi trang này được tạo,',
     'about_us' => 'Thông tin',
     'services' => 'Dịch vụ',
     'charts' => 'Bảng xếp hạng',
     'showtimes' => 'Lịch chiếu',
-
+    'test' => 'Thử nghiệm',
 ];
