@@ -8,17 +8,10 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-
 use Artesaos\SEOTools\Facades\SEOTools;
-use Ophim\Core\Contracts\HasUrlInterface;
-
-use Hacoidev\CachingModel\Contracts\Cacheable;
-use Hacoidev\CachingModel\HasCache;
 
 
-use Ophim\Core\Contracts\TaxonomyInterface;
-
-class Page extends Model implements TaxonomyInterface, Cacheable
+class Page extends Model
 {
     use CrudTrait;
     use Sluggable;
